@@ -1,5 +1,4 @@
 open Lwt.Syntax
-open Printf
 
 module Client
     (Client : Cohttp_lwt.S.Client)
@@ -56,7 +55,7 @@ struct
     let uri = "https://slack.com/api/chat.postMessage" in
     let token = Key_gen.token () in
     let make_body msg =
-      let channel = "C03D2UMKGT1" in
+      let channel = Key_gen.channel () in
       `Assoc [ ("channel", `String channel); ("text", `String msg) ]
     in
     let send_msg body =

@@ -4,11 +4,15 @@ let token =
   let doc = Key.Arg.info ~doc:"slack bot token" [ "token" ] in
   Key.(create "token" Arg.(required string doc))
 
+let channel =
+  let doc = Key.Arg.info ~doc:"ID of the channel to send the messages to" [ "channel" ] in
+  Key.(create "channel" Arg.(required string doc))
+
 let client =
   let packages =
     [ package "cohttp-mirage"; package "duration"; package "yojson" ]
   in
-  main ~keys:[ key token ] ~packages "Unikernel.Client"
+  main ~keys:[ key token; key channel ] ~packages "Unikernel.Client"
   @@ http_client
   @-> time
   @-> random

@@ -1,11 +1,11 @@
 open Mirage
 
 let uri =
-  let doc = Key.Arg.info ~doc:"URL to fetch" [ "uri" ] in
-  Key.(create "uri" Arg.(opt string "https://mirage.io" doc))
+  let doc = Key.Arg.info ~doc:"slack bot token" [ "token" ] in
+  Key.(create "token" Arg.(required string doc))
 
 let client =
-  let packages = [ package "cohttp-mirage"; package "duration" ] in
+  let packages = [ package "cohttp-mirage"; package "duration"; package "yojson" ] in
   main ~keys:[ key uri ] ~packages "Unikernel.Client" @@ http_client @-> job
 
 let () =
